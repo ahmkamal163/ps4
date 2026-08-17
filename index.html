@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" manifest="cache.manifest">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WD STORE PS4exploit</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./index_files/misc.js"></script>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header class="top-header">
+    <div class="header-titles">
+      <h1 class="glow-title">AHMED KAMAL</h1>
+      <h2>WD STORE</h2>
+      <h3 id="UA">Running on: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36</h3>
+    </div>
+    <div class="top-right-container">
+      <img src="logo.jpg" alt="WD STORE Logo" class="top-right-logo">
+    </div>
+  </header>
+
+  <!-- Controls Panel -->
+  <section class="control-panel card">
+    <form id="kernel-options">
+      <label class="radio-label">
+        <input type="radio" name="kernel" id="netctrl-exploit" value="netctrl">
+        <span class="custom-radio"></span>
+        NetCtrl
+      </label>
+      <label class="radio-label">
+        <input type="radio" name="kernel" id="lapse-exploit" value="lapse">
+        <span class="custom-radio"></span>
+        Lapse
+      </label>
+    </form>
+    
+    <div class="action-group">
+      <button id="jeilbrek" disabled="">Jeilbrek</button>
+      <label class="checkbox-container">
+        <input id="autoJbInput" type="checkbox">
+        Executing
+      </label>
+    </div>
+  </section>
+
+  <!-- Main Grid Layout -->
+  <main class="main-layout">
+    <!-- Left Column: Image -->
+    <div class="media-box card">
+      <img src="cat.jpg" alt="A cat staring at you">
+    </div>
+
+    <!-- Center Column: Console Screen -->
+    <div class="console-box card">
+      <div class="console-header">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="console-title">SYSTEM LOG</span>
+      </div>
+      <pre id="console">Ready. Awaiting execution...
+  [+] Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36
+[-] Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 not supported !!
+[-] Error: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 not supported !!
+    at Object.init (https://zecoxao.github.io/ntfonto/src/misc.js:45:13)
+    at doJb (https://zecoxao.github.io/ntfonto/src/main.js:15:13)</pre>
+    </div>
+
+    <!-- Right Column: Realistic Vector DualShock 4 Controller -->
+    <div class="controller-box card">
+      <svg class="ps4-controller-svg" viewBox="0 0 500 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Handles / Outer Shell -->
+        <path d="M125 60 C180 55 320 55 375 60 C420 65 470 120 475 210 C480 270 440 320 405 320 C380 320 350 280 335 240 C310 245 190 245 165 240 C150 280 120 320 95 320 C60 320 20 270 25 210 C30 120 80 65 125 60 Z" fill="#1e2430" stroke="#0f1319" stroke-width="6"/>
+        
+        <!-- Lightbar glow at top -->
+        <path d="M 210 57 L 290 57 L 285 64 L 215 64 Z" fill="#2563eb" filter="drop-shadow(0px 0px 6px #3b82f6)"/>
+
+        <!-- Touchpad -->
+        <path d="M175 70 L325 70 L315 150 L185 150 Z" fill="#12161f" stroke="#2a3344" stroke-width="3" rx="4"/>
+
+        <!-- Options & Share Buttons -->
+        <ellipse cx="155" cy="90" rx="6" ry="10" fill="#2a3344"/>
+        <ellipse cx="345" cy="90" rx="6" ry="10" fill="#2a3344"/>
+
+        <!-- D-Pad Base Circle -->
+        <circle cx="115" cy="150" r="42" fill="#12161f"/>
+        <!-- Directional Pad Buttons -->
+        <path d="M107 116 h16 v22 h22 v16 h-22 v22 h-16 v-22 h-22 v-16 h22 z" fill="#2a3344" stroke="#0f1319" stroke-width="2"/>
+
+        <!-- Action Buttons Base Circle -->
+        <circle cx="385" cy="150" r="42" fill="#12161f"/>
+        <!-- Action Buttons (Triangle, Circle, Cross, Square) -->
+        <!-- Triangle (Top) -->
+        <circle cx="385" cy="122" r="9" fill="#2a3344"/>
+        <path d="M385 117 L389 125 L381 125 Z" stroke="#34d399" stroke-width="2" fill="none"/>
+        <!-- Circle (Right) -->
+        <circle cx="413" cy="150" r="9" fill="#2a3344"/>
+        <circle cx="413" cy="150" r="4" stroke="#f43f5e" stroke-width="2" fill="none"/>
+        <!-- Cross (Bottom) -->
+        <circle cx="385" cy="178" r="9" fill="#2a3344"/>
+        <path d="M381 174 L389 182 M389 174 L381 182" stroke="#38bdf8" stroke-width="2"/>
+        <!-- Square (Left) -->
+        <circle cx="357" cy="150" r="9" fill="#2a3344"/>
+        <rect x="353" y="146" width="8" height="8" stroke="#a855f7" stroke-width="2" fill="none"/>
+
+        <!-- Analog Stick Base Well Left & Right -->
+        <circle cx="185" cy="210" r="38" fill="#12161f"/>
+        <circle cx="315" cy="210" r="38" fill="#12161f"/>
+
+        <!-- Analog Thumbsticks -->
+        <circle cx="185" cy="210" r="28" fill="#222a38" stroke="#374151" stroke-width="4"/>
+        <circle cx="185" cy="210" r="20" fill="#1a202c"/>
+        
+        <circle cx="315" cy="210" r="28" fill="#222a38" stroke="#374151" stroke-width="4"/>
+        <circle cx="315" cy="210" r="20" fill="#1a202c"/>
+
+        <!-- PlayStation Center Button -->
+        <circle cx="250" cy="180" r="14" fill="#12161f" stroke="#2563eb" stroke-width="2"/>
+        <!-- PS Logo Shape -->
+        <path d="M247 173 v12 m2 -10 c2 -2 5 0 2 3 c-3 2 -5 3 -2 5" stroke="#ffffff" stroke-width="2" fill="none"/>
+      </svg>
+      <span class="controller-status">DUALSHOCK 4</span>
+    </div>
+  </main>
+
+  <script src="./index_files/main.js"></script>
+  <script src="./index_files/script.js"></script>
+</body>
+</html>
