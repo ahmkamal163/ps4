@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             else if (fwNum >= 11.50 && fwNum <= 12.02) {
                 var script = document.createElement('script');
                 script.type = 'module';
-                script.src = "slopliquid/chain_lapse.js"; // Updated path reference safely
+                script.src = "slopliquid/chain_lapse.js";
                 script.onerror = onScriptError;
                 document.head.appendChild(script);
             }
@@ -91,10 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </header>
 
-<!-- Main Grid Layout matching your CSS -->
+<!-- Main Grid Layout -->
 <main class="main-layout">
     
-    <!-- Left Media Box / Poster or Logo -->
+    <!-- Left Media Box / Logo -->
     <div class="card media-box">
         <img src="../assets/logo.png" alt="WDstore Logo" onerror="this.style.display='none'">
     </div>
@@ -110,11 +110,11 @@ document.addEventListener("DOMContentLoaded", () => {
         <pre id="console">Loading GoldHEN v2.4b18.10... Please Wait</pre>
     </div>
 
-    <!-- Right Controller / Info Box -->
+    <!-- Right Controller / Info Box with Image Slot -->
     <div class="card controller-box">
-        <svg class="ps4-controller-svg" viewBox="0 0 512 512" fill="currentColor">
-            <path d="M351.4 121.2c-23.7-11.8-51.5-18.7-95.4-18.7-43.9 0-71.7 6.9-95.4 18.7-27.1 13.5-47.5 35.8-60.8 66.8-14.7 34.3-22.2 75.8-22.3 123.6 0 11.4 1.1 22.3 3.3 32.7 7.2 34.6 23.3 64.9 48 90.3 22.3 22.8 49.3 38.3 80.4 46.2 16.4 4.1 33.7 6.3 51.8 6.6 18.2-.3 35.5-2.5 51.8-6.6 31.1-7.9 58.1-23.4 80.4-46.2 24.7-25.4 40.8-55.7 48-90.3 2.2-10.4 3.3-21.3 3.3-32.7-.1-47.8-7.6-89.3-22.3-123.6-13.3-31-33.7-53.3-60.8-66.8zM176 256c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm160 0c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm-64-64c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm0 128c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"/>
-        </svg>
+        <!-- Change 'path/to/your-image.png' to point to your actual image file whenever you are ready -->
+        <img src="../ahm/logo.jpg" alt="Custom Image" style="width: 100%; max-width: 160px; height: auto; border-radius: 8px; filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6);" onerror="this.style.display='none'">
+        
         <span class="controller-status">WDSTORE HOST</span>
         <span class="phone-number">Active</span>
     </div>
