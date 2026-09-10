@@ -1,23 +1,75 @@
 <!DOCTYPE html>
-<html manifest="700.manifest">
+<html lang="en" manifest="700.manifest">
 <head>
-<title>AHMED KAMAL</title>
+<meta charset="UTF-8">
+<title>AHMED KAMAL PS4 - Cache Installation (7.00)</title>
 <link rel="stylesheet" href="../style.css">
+<script>
+history.replaceState(null, null, 'index.html');
+var histlength = history.length;
+history.go(-histlength);
+
+function DLProgress(e) {
+    var percent = Math.round(e.loaded / e.total * 100);
+    var msgs = document.getElementById("console");
+    if (msgs) msgs.innerHTML = "Installing Offline Cache: " + percent + "%";
+}
+
+function DisplayCacheProgress() {
+    var msgs = document.getElementById("console");
+    if (msgs) msgs.innerHTML = "Cache Installed Successfully ✔<br><br>Now Close And Re-Open Your Browser ...";
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    window.applicationCache.addEventListener("progress", DLProgress, false);
+    window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
+    window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
+    window.applicationCache.onerror = function(e) {
+        var msgs = document.getElementById("console");
+        if (msgs) msgs.innerHTML = 'Error Installing Cache! - Clear and Re-Open Your Browser ...';
+    };
+});
+</script>
 </head>
 <body>
-<script>
-history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
-function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));window.msgs.innerHTML="Installing Offline Cache: " + Percent + "%";}
-function DisplayCacheProgress(){window.msgs.innerHTML="Cache Installed Successfully ✔";setTimeout(function(){window.msgs.innerHTML="Now Close And Re-Open Your Browser ...";},1500);}
-window.applicationCache.addEventListener("progress",DLProgress,false);
-window.applicationCache.oncached=function(e){DisplayCacheProgress();};
-window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
-window.applicationCache.onerror=function(e){window.msgs.innerHTML="Error Installing Cache! - Clear and Re-Open Your Browser ...";};
-</script>
-<h1>AHMED KAMAL</h1>
-<hr>
-<br>
-<h1 id=msgs style="font-size: 30px;margin-top: 77px;margin-bottom: 455px;">Starting Cache Installation...</h1>
-<h1 style="margin-top: 43px;">WDstore<a  style="color: #f31414;margin-left: 10px;margin-right: 10px;"></h1>
+
+<!-- Header Section -->
+<header class="top-header">
+    <div>
+        <h1 class="glow-title">AHMED KAMAL PS4</h1>
+        <h2>GoldHEN Environment</h2>
+        <h3>Offline Cache Installer (7.00)</h3>
+    </div>
+</header>
+
+<!-- Main Grid Layout -->
+<main class="main-layout">
+    
+    <!-- Left Media Box / Logo -->
+    <div class="card media-box">
+        <img src="../assets/logo.png" alt="WDstore Logo" onerror="this.style.display='none'">
+    </div>
+
+    <!-- Center Terminal Console Window -->
+    <div class="card console-box">
+        <div class="console-header">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+            <span class="console-title">CACHE INSTALLER OUTPUT</span>
+        </div>
+        <pre id="console">Starting Cache Installation...</pre>
+    </div>
+
+    <!-- Right Controller / Info Box with Image Slot -->
+    <div class="card controller-box">
+        <img src="../ahm/logo.jpg" alt="Custom Image" style="width: 100%; max-width: 160px; height: auto; border-radius: 8px; filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));" onerror="this.style.display='none'">
+        
+        <span class="controller-status">WDSTORE HOST</span>
+        <span class="phone-number" style="color: #f31414;">Offline Mode</span>
+    </div>
+
+</main>
+
 </body>
 </html>
