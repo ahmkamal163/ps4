@@ -1,125 +1,249 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <title>AHMED KAMAL PS4</title>
+
 <link rel="stylesheet" href="../style.css">
+
 </head>
+
 <body>
 
+
+
 <script>
+
 var uaFull = navigator.userAgent;
+
 var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
+
 var isPS4 = match !== null;
+
 var fwVersion = isPS4 ? match[1] : "Unknown";
+
 var fwNum = parseFloat(fwVersion);
 
+
+
 function onScriptError() {
+
     var msgs = document.getElementById("console");
+
     if (msgs) msgs.innerHTML = "Content not Found! - Clear Browser Data and Re-Install Cache ...";
+
 }
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
+
     var msgs = document.getElementById("console");
+
     
+
     if (!isPS4) {
+
         msgs.innerHTML = "Only for PS4 with Firmware 7.00 to 13.00";
+
     } else {
+
         if (window.applicationCache.status == '0') {
+
             if (fwNum >= 7.00 && fwNum <= 8.52) {
+
                 window.location.replace("cache700.html");
+
             } else if (fwNum >= 9.00 && fwNum <= 9.60) {
+
                 window.location.replace("cache900.html");
+
             } else if (fwNum >= 10.00 && fwNum <= 11.02) {
+
                 window.location.replace("cachecss.html");
+
             } else if (fwNum >= 11.50 && fwNum <= 13.00) {
+
                 window.location.replace("cacheslopkit.html");
+
             } else {
+
                 msgs.innerHTML = 'Unsupported Firmware: <span style="color: #ef4444;">' + fwVersion + '</span>';
+
             }
+
         } else {
+
             if (fwNum >= 7.00 && fwNum <= 8.52) {
+
                 var script = document.createElement('script');
+
                 script.type = 'module';
+
                 script.src = "700/alert.js";
+
                 script.onerror = onScriptError;
+
                 document.head.appendChild(script);
+
             }
+
             else if (fwNum >= 9.00 && fwNum <= 9.60) {
+
                 var script = document.createElement('script');
+
                 script.type = 'module';
+
                 script.src = "900/alert.js";
+
                 script.onerror = onScriptError;
+
                 document.head.appendChild(script);
+
             }
+
             else if (fwNum >= 10.00 && fwNum <= 11.02) {
+
                 var script = document.createElement('script');
+
                 script.src = "css/main.js";
+
                 script.onerror = onScriptError;
+
                 script.onload = function () {
+
                     setTimeout(function () {
+
                         if (typeof doJb === 'function') doJb();
+
                     }, 500);
+
                 };
+
                 document.head.appendChild(script);
+
             }
+
             else if (fwNum >= 11.50 && fwNum <= 12.02) {
+
                 var script = document.createElement('script');
+
                 script.type = 'module';
+
                 script.src = "slopliquid/chain_lapse.js";
+
                 script.onerror = onScriptError;
+
                 document.head.appendChild(script);
+
             }
+
             else if (fwNum >= 12.50 && fwNum <= 13.00) {
+
                 var script = document.createElement('script');
+
                 script.type = 'module';
+
                 script.src = "slopkit/chain_poops.js";
+
                 script.onerror = onScriptError;
+
                 document.head.appendChild(script);
+
             }
+
         }
+
     }
+
 });
+
 </script>
 
+
+
 <!-- Header Section -->
+
 <header class="top-header">
+
     <div>
+
         <h1 class="glow-title">AHMED KAMAL PS4</h1>
+
         <h2>GoldHEN Environment</h2>
+
         <h3>PlayStation 4 Exploit Host</h3>
+
     </div>
+
 </header>
 
+
+
 <!-- Main Grid Layout -->
+
 <main class="main-layout">
+
     
+
     <!-- Left Media Box / Logo -->
+
     <div class="card media-box">
-        <img src="../assets/logo.png" alt="WDstore Logo" onerror="this.style.display='none'">
+
+        <img src="../ahm/bleach.png" alt="WDstore Logo" onerror="this.style.display='none'">
+
     </div>
+
+
 
     <!-- Center Terminal Console Window -->
+
     <div class="card console-box">
+
         <div class="console-header">
+
             <div class="dot red"></div>
+
             <div class="dot yellow"></div>
+
             <div class="dot green"></div>
+
             <span class="console-title">SYSTEM OUTPUT</span>
+
         </div>
+
         <pre id="console">Loading GoldHEN v2.4b18.10... Please Wait</pre>
+
     </div>
 
+
+
     <!-- Right Controller / Info Box with Image Slot -->
-    <div class="card console-box">
+
+    <div class="card controller-box">
+
         <!-- Change 'path/to/your-image.png' to point to your actual image file whenever you are ready -->
+
         <img src="../ahm/logo.png" alt="Custom Image" style="width: 100%; max-width: 160px; height: auto; border-radius: 8px; filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6);" onerror="this.style.display='none'">
+
         
+
         <span class="controller-status">WDSTORE HOST</span>
+
         <span class="phone-number">Active</span>
+
     </div>
+
+
 
 </main>
 
+
+
 </body>
+
 </html>
