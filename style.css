@@ -152,7 +152,7 @@ button:disabled {
   gap: 20px;
 }
 
-/* Left Media Box - Card wrapper removed, photo takes the slot */
+/* Left Media Box */
 .media-box {
   background: transparent;
   backdrop-filter: none;
@@ -250,5 +250,4 @@ button:disabled {
   font-size: 15px;
   font-weight: 600;
   margin: 2px 0 8px 0;
-}
 }
