@@ -1,50 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" manifest="900.manifest">
 <head>
-<meta charset="UTF-8">
-<title>AHMED KAMAL PS4 - Cache Installation</title>
-<link rel="stylesheet" href="../style.css">
-<script>
-history.replaceState(null,null,'index.html');
-var histlength = history.length;
-history.go(-histlength);
-
-// Helper function to safely update the console output box
-function getConsole() {
-    return document.getElementById('console');
-}
-
-function DLProgress(e) {
-    var Percent = Math.round(e.loaded / e.total * 100);
-    var consoleEl = getConsole();
-    if (consoleEl) {
-        consoleEl.innerHTML = "Installing Offline Cache: " + Percent + "%";
-    }
-}
-
-function DisplayCacheProgress() {
-    var consoleEl = getConsole();
-    if (consoleEl) {
-        consoleEl.innerHTML = "Cache Installed Successfully ✔";
-        setTimeout(function() {
-            var cEl = getConsole();
-            if (cEl) {
-                cEl.innerHTML = "Now Close And Re-Open Your Browser ...";
-            }
-        }, 1500);
-    }
-}
-
-window.applicationCache.addEventListener("progress", DLProgress, false);
-window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
-window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
-window.applicationCache.onerror = function(e) {
-    var consoleEl = getConsole();
-    if (consoleEl) {
-        consoleEl.innerHTML = "Error Installing Cache! - Clear and Re-Open Your Browser ...";
-    }
-};
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AHMED KAMAL PS4 - Cache Installation</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
@@ -60,8 +20,10 @@ window.applicationCache.onerror = function(e) {
 <!-- Main Grid Layout -->
 <main class="main-layout">
     
-    <!-- Raw Image -->
-    <img src="../ahm/bleach.png" alt="Bleach Image" style="width: 120%; height: 100%; object-fit: cover; border-radius: 12px; display: block;" onerror="this.style.display='none'">
+    <!-- Hero Image Slot -->
+    <div class="image-wrapper">
+        <img src="../ahm/bleach.png" alt="Bleach Theme" class="hero-img" onerror="this.style.display='none'">
+    </div>
 
     <!-- Center Terminal Console Window -->
     <div class="card console-box">
@@ -74,15 +36,63 @@ window.applicationCache.onerror = function(e) {
         <pre id="console">Starting Cache Installation...</pre>
     </div>
 
-    <!-- Right Controller / Info Box with Image Slot -->
+    <!-- Right Controller / Info Box -->
     <div class="card controller-box">
-        <img src="../ahm/logo.png" alt="Custom Image" style="width: 100%; max-width: 160px; height: auto; border-radius: 8px; filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));" onerror="this.style.display='none'">
-        
+        <img src="../ahm/logo.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
         <span class="controller-status">WDSTORE HOST</span>
         <span class="phone-number" style="color: #f31414;">Offline Mode</span>
     </div>
 
 </main>
+
+<script>
+// Clear browser history stack on boot
+try {
+    history.replaceState(null, null, 'index.html');
+    if (history.length > 1) {
+        history.go(-history.length);
+    }
+} catch (e) {
+    console.warn("History rewrite blocked:", e);
+}
+
+// Console output handler
+function logStatus(msg) {
+    var consoleEl = document.getElementById('console');
+    if (consoleEl) {
+        consoleEl.innerHTML = msg;
+    }
+}
+
+function DLProgress(e) {
+    if (e && e.total) {
+        var percent = Math.round((e.loaded / e.total) * 100);
+        logStatus("Installing Offline Cache: " + percent + "%");
+    } else {
+        logStatus("Installing Offline Cache...");
+    }
+}
+
+function DisplayCacheProgress() {
+    logStatus("Cache Installed Successfully ✔");
+    setTimeout(function() {
+        logStatus("Now Close And Re-Open Your Browser ...");
+    }, 1500);
+}
+
+// Safely attach ApplicationCache events
+if (window.applicationCache) {
+    var appCache = window.applicationCache;
+    appCache.addEventListener("progress", DLProgress, false);
+    appCache.addEventListener("cached", DisplayCacheProgress, false);
+    appCache.addEventListener("updateready", DisplayCacheProgress, false);
+    appCache.addEventListener("error", function(e) {
+        logStatus("Error Installing Cache! - Clear and Re-Open Your Browser ...");
+    }, false);
+} else {
+    logStatus("Error: AppCache API is not supported on this browser.");
+}
+</script>
 
 </body>
 </html>
