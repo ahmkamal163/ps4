@@ -2,10 +2,11 @@ CACHE MANIFEST
 # Version 1.0 - Slopkit Host
 
 CACHE:
-../img.jpg
+../index.html
 ../style.css
+../ahm/bleach.png
+../ahm/logo.png
 goldhen_2.4b18.10.bin
-index.html
 slopkit/chain_lapse.js
 slopkit/chain_poops.js
 slopkit/core.js
