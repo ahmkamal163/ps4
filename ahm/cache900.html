@@ -5,16 +5,46 @@
 <title>AHMED KAMAL PS4 - Cache Installation</title>
 <link rel="stylesheet" href="../style.css">
 <script>
-        if (window.applicationCache) {
-            window.applicationCache.addEventListener('cached', function() {
-                alert('Cache Installed Successfully!');
-                window.location.href = "index.html";
-            });
-            window.applicationCache.addEventListener('noupdate', function() {
-                window.location.href = "index.html";
-            });
-        }
-    </script>
+history.replaceState(null,null,'index.html');
+var histlength = history.length;
+history.go(-histlength);
+
+// Helper function to safely update the console output box
+function getConsole() {
+    return document.getElementById('console');
+}
+
+function DLProgress(e) {
+    var Percent = Math.round(e.loaded / e.total * 100);
+    var consoleEl = getConsole();
+    if (consoleEl) {
+        consoleEl.innerHTML = "Installing Offline Cache: " + Percent + "%";
+    }
+}
+
+function DisplayCacheProgress() {
+    var consoleEl = getConsole();
+    if (consoleEl) {
+        consoleEl.innerHTML = "Cache Installed Successfully ✔";
+        setTimeout(function() {
+            var cEl = getConsole();
+            if (cEl) {
+                cEl.innerHTML = "Now Close And Re-Open Your Browser ...";
+            }
+        }, 1500);
+    }
+}
+
+window.applicationCache.addEventListener("progress", DLProgress, false);
+window.applicationCache.oncached = function(e) { DisplayCacheProgress(); };
+window.applicationCache.onupdateready = function(e) { DisplayCacheProgress(); };
+window.applicationCache.onerror = function(e) {
+    var consoleEl = getConsole();
+    if (consoleEl) {
+        consoleEl.innerHTML = "Error Installing Cache! - Clear and Re-Open Your Browser ...";
+    }
+};
+</script>
 </head>
 <body>
 
