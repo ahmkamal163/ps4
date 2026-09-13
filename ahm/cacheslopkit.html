@@ -2,20 +2,10 @@
 <html lang="en" manifest="ahm/slopkit.manifest">
 <head>
 <meta charset="UTF-8">
-<title>AHMED KAMAL PS4</title>
+<title>AHMED KAMAL PS4 - Slopkit Cache</title>
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-
-<script>
-history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
-function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));window.msgs.innerHTML="Installing Offline Cache: " + Percent + "%";}
-function DisplayCacheProgress(){window.msgs.innerHTML="Cache Installed Successfully ✔";setTimeout(function(){window.msgs.innerHTML="Now Close And Re-Open Your Browser ...";},1500);}
-window.applicationCache.addEventListener("progress",DLProgress,false);
-window.applicationCache.oncached=function(e){DisplayCacheProgress();};
-window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
-window.applicationCache.onerror=function(e){window.msgs.innerHTML="Error Installing Cache! - Clear and Re-Open Your Browser ...";};
-</script>
 
 <!-- Header Section -->
 <header class="top-header">
@@ -26,12 +16,11 @@ window.applicationCache.onerror=function(e){window.msgs.innerHTML="Error Install
     </div>
 </header>
 
-<!-- Main Grid Layout matching your modern style -->
+<!-- Main Grid Layout -->
 <main class="main-layout">
     
-    <!-- Raw Image (Card container completely removed) -->
-    <img src="../ahm/bleach.png" alt="Bleach Image" style="width: 120%; height: 100%; object-fit: cover; border-radius: 12px; display: block;" onerror="this.style.display='none'">
-
+    <!-- Hero Image -->
+    <img src="../ahm/bleach.png" alt="Bleach Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block;" onerror="this.style.display='none'">
 
     <!-- Center Terminal Console Window -->
     <div class="card console-box">
@@ -44,15 +33,61 @@ window.applicationCache.onerror=function(e){window.msgs.innerHTML="Error Install
         <pre id="console">Starting Cache Installation...</pre>
     </div>
 
-    <!-- Right Controller / Info Box with Image Slot -->
+    <!-- Right Controller / Info Box -->
     <div class="card controller-box">
         <img src="../ahm/logo.png" alt="Custom Image" style="width: 100%; max-width: 160px; height: auto; border-radius: 8px; filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));" onerror="this.style.display='none'">
-        
         <span class="controller-status">WDSTORE HOST</span>
         <span class="phone-number">Active</span>
     </div>
 
 </main>
+
+<script>
+// Clear history stack safely
+try {
+    history.replaceState(null, null, 'index.html');
+    if (history.length > 1) {
+        history.go(-history.length);
+    }
+} catch (e) {}
+
+// Output Helper
+function logConsole(msg) {
+    var consoleEl = document.getElementById('console');
+    if (consoleEl) {
+        consoleEl.innerHTML = msg;
+    }
+}
+
+function DLProgress(e) {
+    if (e && e.total) {
+        var percent = Math.round((e.loaded / e.total) * 100);
+        logConsole("Installing Offline Cache: " + percent + "%");
+    } else {
+        logConsole("Installing Offline Cache...");
+    }
+}
+
+function DisplayCacheProgress() {
+    logConsole("Cache Installed Successfully ✔");
+    setTimeout(function() {
+        logConsole("Now Close And Re-Open Your Browser ...");
+    }, 1500);
+}
+
+// Attach AppCache listeners safely
+if (window.applicationCache) {
+    var appCache = window.applicationCache;
+    appCache.addEventListener("progress", DLProgress, false);
+    appCache.addEventListener("cached", DisplayCacheProgress, false);
+    appCache.addEventListener("updateready", DisplayCacheProgress, false);
+    appCache.addEventListener("error", function(e) {
+        logConsole("Error Installing Cache! - Clear and Re-Open Your Browser ...");
+    }, false);
+} else {
+    logConsole("AppCache API is not supported in this browser environment.");
+}
+</script>
 
 </body>
 </html>
