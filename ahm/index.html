@@ -14,7 +14,7 @@ var isPS4 = match !== null;
 var fwVersion = isPS4 ? match[1] : "Unknown";
 var fwNum = parseFloat(fwVersion);
 
-// Helper function to safely update the console output box
+// Safely obtain console output handle
 function getConsole() {
     return document.getElementById('console');
 }
@@ -26,6 +26,15 @@ function onScriptError() {
     }
 }
 
+function injectScript(src, isModule, onLoadCallback) {
+    var script = document.createElement('script');
+    if (isModule) script.type = 'module';
+    script.src = src;
+    script.onerror = onScriptError;
+    if (onLoadCallback) script.onload = onLoadCallback;
+    document.head.appendChild(script);
+}
+
 if (!isPS4) {
     document.addEventListener("DOMContentLoaded", () => {
         var consoleEl = getConsole();
@@ -34,11 +43,14 @@ if (!isPS4) {
         }
     });
 } else {
-    if (window.applicationCache.status == '0') {
+    var appCacheStatus = (window.applicationCache) ? window.applicationCache.status : -1;
+
+    // Status 0 = Uncached: Redirect to installer HTML
+    if (appCacheStatus === 0 || appCacheStatus === -1) {
         if (fwNum == 5.05 || fwNum == 5.07) {
-            window.location.replace("cache505.html");
+            window.location.replace("ahm/cache505.html");
         } else if (fwNum >= 7.00 && fwNum <= 8.52) {
-            window.location.replace("cache700.html");
+            window.location.replace("ahm/cache700.html");
         } else if (fwNum >= 9.00 && fwNum <= 9.60) {
             window.location.replace("ahm/cache900.html");
         } else if (fwNum >= 10.00 && fwNum <= 11.02) {
@@ -54,51 +66,31 @@ if (!isPS4) {
             });
         }
     } else {
-        if (fwNum == 5.05 || fwNum == 5.07) {
-            var script = document.createElement('script');
-            script.src = "505/exploit.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 7.00 && fwNum <= 8.52) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "700/alert.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 9.00 && fwNum <= 9.60) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "ahm/900/alert.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 10.00 && fwNum <= 11.02) {
-            var script = document.createElement('script');
-            script.src = "ahm/css/main.js";
-            script.onerror = onScriptError;
-            script.onload = function () {
-                setTimeout(function () {
-                    doJb();
-                }, 500);
-            };
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 11.50 && fwNum <= 12.02) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "ahm/slopkit/chain_lapse.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-        else if (fwNum >= 12.50 && fwNum <= 13.00) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "ahm/slopkit/chain_poops.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
+        // Status 1+ = Cached: Inject appropriate payload script
+        document.addEventListener("DOMContentLoaded", () => {
+            if (fwNum == 5.05 || fwNum == 5.07) {
+                injectScript("ahm/505/exploit.js", false);
+            }
+            else if (fwNum >= 7.00 && fwNum <= 8.52) {
+                injectScript("ahm/700/alert.js", true);
+            }
+            else if (fwNum >= 9.00 && fwNum <= 9.60) {
+                injectScript("ahm/900/alert.js", true);
+            }
+            else if (fwNum >= 10.00 && fwNum <= 11.02) {
+                injectScript("ahm/css/main.js", false, function () {
+                    setTimeout(function () {
+                        if (typeof doJb === "function") doJb();
+                    }, 500);
+                });
+            }
+            else if (fwNum >= 11.50 && fwNum <= 12.02) {
+                injectScript("ahm/slopkit/chain_lapse.js", true);
+            }
+            else if (fwNum >= 12.50 && fwNum <= 13.00) {
+                injectScript("ahm/slopkit/chain_poops.js", true);
+            }
+        });
     }
 }
 </script>
@@ -114,9 +106,7 @@ if (!isPS4) {
 
 <!-- Main Grid Layout -->
 <main class="main-layout">
-    
-    <!-- Raw Image -->
-    <img src="../ahm/bleach.png" alt="Bleach Image" style="width: 120%; height: 100%; object-fit: cover; border-radius: 12px; display: block;" onerror="this.style.display='none'">
+    <img src="../ahm/bleach.png" alt="Bleach Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block;" onerror="this.style.display='none'">
 
     <!-- Center Terminal Console Window -->
     <div class="card console-box">
@@ -129,14 +119,12 @@ if (!isPS4) {
         <pre id="console">Loading GoldHEN v2.4b18.10... Please Wait</pre>
     </div>
 
-    <!-- Right Controller / Info Box with Image Slot -->
+    <!-- Right Controller / Info Box -->
     <div class="card controller-box">
         <img src="../ahm/logo.png" alt="Custom Image" style="width: 100%; max-width: 160px; height: auto; border-radius: 8px; filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));" onerror="this.style.display='none'">
-        
         <span class="controller-status">WDSTORE HOST</span>
         <span class="phone-number">Active</span>
     </div>
-
 </main>
 
 </body>
