@@ -43,50 +43,13 @@
 </main>
 
 <script>
-// Clear history stack safely
-try {
-    history.replaceState(null, null, 'index.html');
-    if (history.length > 1) {
-        history.go(-history.length);
-    }
-} catch (e) {}
-
-// Output Helper Function
-function logConsole(msg) {
-    var consoleEl = document.getElementById('console');
-    if (consoleEl) {
-        consoleEl.innerHTML = msg;
-    }
-}
-
-function DLProgress(e) {
-    if (e && e.total) {
-        var percent = Math.round((e.loaded / e.total) * 100);
-        logConsole("Installing Offline Cache: " + percent + "%");
-    } else {
-        logConsole("Installing Offline Cache...");
-    }
-}
-
-function DisplayCacheProgress() {
-    logConsole("Cache Installed Successfully ✔");
-    setTimeout(function() {
-        logConsole("Now Close And Re-Open Your Browser ...");
-    }, 1500);
-}
-
-// Attach AppCache listeners safely
-if (window.applicationCache) {
-    var appCache = window.applicationCache;
-    appCache.addEventListener("progress", DLProgress, false);
-    appCache.addEventListener("cached", DisplayCacheProgress, false);
-    appCache.addEventListener("updateready", DisplayCacheProgress, false);
-    appCache.addEventListener("error", function(e) {
-        logConsole("Error Installing Cache! - Clear and Re-Open Your Browser ...");
-    }, false);
-} else {
-    logConsole("AppCache API is not supported in this browser environment.");
-}
+history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
+function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));window.msgs.innerHTML="Installing Offline Cache: " + Percent + "%";}
+function DisplayCacheProgress(){window.msgs.innerHTML="Cache Installed Successfully ✔";setTimeout(function(){window.msgs.innerHTML="Now Close And Re-Open Your Browser ...";},1500);}
+window.applicationCache.addEventListener("progress",DLProgress,false);
+window.applicationCache.oncached=function(e){DisplayCacheProgress();};
+window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
+window.applicationCache.onerror=function(e){window.msgs.innerHTML="Error Installing Cache! - Clear and Re-Open Your Browser ...";};
 </script>
 
 </body>
