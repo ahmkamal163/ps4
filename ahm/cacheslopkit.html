@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" manifest="slopkit.manifest">
 <head>
-<meta charset="UTF-8">
-<title>AHMED KAMAL PS4 - Slopkit Cache</title>
-<link rel="stylesheet" href="../style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AHMED KAMAL PS4 - Cache Installation (FW 11.50-13.00)</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
@@ -11,16 +12,18 @@
 <header class="top-header">
     <div>
         <h1 class="glow-title">AHMED KAMAL PS4</h1>
-        <h2>GoldHEN Environment</h2>
-        <h3>PlayStation 4 Exploit Host</h3>
+        <h2>GoldHEN / Slopkit Environment</h2>
+        <h3>FW 11.50 - 13.00 Offline Cache Installer</h3>
     </div>
 </header>
 
 <!-- Main Grid Layout -->
 <main class="main-layout">
     
-    <!-- Hero Image -->
-    <img src="bleach.png" alt="Bleach Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block;" onerror="this.style.display='none'">
+    <!-- Hero Image Slot -->
+    <div class="image-wrapper">
+        <img src="bleach.png" alt="Bleach Theme" class="hero-img" onerror="this.style.display='none'">
+    </div>
 
     <!-- Center Terminal Console Window -->
     <div class="card console-box">
@@ -28,64 +31,84 @@
             <div class="dot red"></div>
             <div class="dot yellow"></div>
             <div class="dot green"></div>
-            <span class="console-title">CACHE INSTALLER</span>
+            <span class="console-title">CACHE INSTALLER OUTPUT</span>
         </div>
-        <pre id="console">Starting Cache Installation...</pre>
+        <pre id="console">Initializing Slopkit Cache Installer...</pre>
     </div>
 
     <!-- Right Controller / Info Box -->
     <div class="card controller-box">
-        <img src="logo.png" alt="Custom Image" style="width: 100%; max-width: 160px; height: auto; border-radius: 8px; filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));" onerror="this.style.display='none'">
+        <img src="logo.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
         <span class="controller-status">WDSTORE HOST</span>
-        <span class="phone-number">Active</span>
+        <span class="phone-number" style="color: #f31414;">Offline Mode</span>
     </div>
 
 </main>
 
 <script>
-// Clear history stack safely
+// Rewrite address bar to sibling index.html (same directory)
 try {
     history.replaceState(null, null, 'index.html');
     if (history.length > 1) {
         history.go(-history.length);
     }
-} catch (e) {}
+} catch (e) {
+    console.warn("History rewrite blocked:", e);
+}
 
-// Output Helper
-function logConsole(msg) {
+// Target UI output element
+function logStatus(msg) {
     var consoleEl = document.getElementById('console');
     if (consoleEl) {
         consoleEl.innerHTML = msg;
     }
 }
 
+// Calculate and render download progress (0% to 100%)
 function DLProgress(e) {
-    if (e && e.total) {
+    if (e && e.lengthComputable && e.total) {
         var percent = Math.round((e.loaded / e.total) * 100);
-        logConsole("Installing Offline Cache: " + percent + "%");
+        logStatus("Installing Offline Cache: <span style='color: #00ff00;'>" + percent + "%</span>");
+    } else if (e && e.loaded && e.total) {
+        var percent = Math.round((e.loaded / e.total) * 100);
+        logStatus("Installing Offline Cache: <span style='color: #00ff00;'>" + percent + "%</span>");
     } else {
-        logConsole("Installing Offline Cache...");
+        logStatus("Installing Offline Cache...");
     }
 }
 
+// Executed when all files in slopkit.manifest are successfully downloaded
 function DisplayCacheProgress() {
-    logConsole("Cache Installed Successfully ✔");
+    logStatus("Slopkit Cache Installed Successfully ✔");
     setTimeout(function() {
-        logConsole("Now Close And Re-Open Your Browser ...");
-    }, 1500);
+        logStatus("Now Close Browser & Re-Open Offline!");
+    }, 2000);
 }
 
-// Attach AppCache listeners safely
+// Attach HTML5 ApplicationCache Event Listeners
 if (window.applicationCache) {
     var appCache = window.applicationCache;
+
+    // Triggered as each file listed in slopkit.manifest finishes downloading
     appCache.addEventListener("progress", DLProgress, false);
+
+    // Triggered when caching completes for the first time
     appCache.addEventListener("cached", DisplayCacheProgress, false);
+
+    // Triggered when an updated manifest finishes downloading
     appCache.addEventListener("updateready", DisplayCacheProgress, false);
+
+    // Triggered if any file in slopkit.manifest returns a 404 error
     appCache.addEventListener("error", function(e) {
-        logConsole("Error Installing Cache! - Clear and Re-Open Your Browser ...");
+        logStatus("<span style='color: #ff3333;'>Error Installing Cache!</span><br>Check slopkit.manifest for 404 missing files.");
+    }, false);
+
+    // Triggered when download process begins
+    appCache.addEventListener("downloading", function() {
+        logStatus("Downloading Manifest Files... <span style='color: #00ff00;'>0%</span>");
     }, false);
 } else {
-    logConsole("AppCache API is not supported in this browser environment.");
+    logStatus("Error: AppCache API is not supported on this browser.");
 }
 </script>
 
