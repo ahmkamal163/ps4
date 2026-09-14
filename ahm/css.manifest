@@ -2,10 +2,10 @@ CACHE MANIFEST
 # Version 1.0 - CS EXP Host
 
 CACHE:
-../ahm/index.html
+index.html
 ../style.css
-../ahm/bleach.png
-../ahm/logo.png
+bleach.png
+logo.png
 goldhen_2.4b18.10.bin
 css/lapse.js
 css/loader.js
