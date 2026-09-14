@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Version 1.0 - Slopkit Host (ahm Subfolder Architecture)
+# Version 1.1 - Slopkit Host (FW 11.50 - 13.00)
 
 CACHE:
 index.html
@@ -7,17 +7,22 @@ index.html
 bleach.png
 logo.png
 goldhen_2.4b18.10.bin
+slopkit/alert.js
 slopkit/chain_lapse.js
 slopkit/chain_poops.js
-slopkit/core.js
+slopkit/chain_psfree.js
+slopkit/config.js
 slopkit/int64.js
-slopkit/mem.js
-slopkit/ps4_offsets.js
-slopkit/rpc_worker.js
-slopkit/patches/1150.bin
-slopkit/patches/1200.bin
-slopkit/patches/1250.bin
-slopkit/patches/1300.bin
+slopkit/kexploit.js
+slopkit/loader.js
+slopkit/main.js
+slopkit/mira.js
+slopkit/netcat.js
+slopkit/psfree.js
+slopkit/rop.js
+slopkit/userland.js
+slopkit/utils.js
+slopkit/webkit.js
 
 NETWORK:
 *
