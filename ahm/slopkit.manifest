@@ -1,27 +1,9 @@
 CACHE MANIFEST
-# Version 1.3 - Clean Slopkit Manifest
+# Version 3.0 - Ultra Minimal Direct Path Test
 
 CACHE:
 index.html
-../style.css
-bleach.png
-logo.png
-slopkit/alert.js
-slopkit/chain_lapse.js
 slopkit/chain_poops.js
-slopkit/chain_psfree.js
-slopkit/config.js
-slopkit/int64.js
-slopkit/kexploit.js
-slopkit/loader.js
-slopkit/main.js
-slopkit/mira.js
-slopkit/netcat.js
-slopkit/psfree.js
-slopkit/rop.js
-slopkit/userland.js
-slopkit/utils.js
-slopkit/webkit.js
 
 NETWORK:
 *
